@@ -1,0 +1,20 @@
+clc; close all; clear all;
+B=imread('imag/im1.png');
+%B=rgb2gray(B);
+F=fft2(B);
+S=abs(F);
+%************
+Fsh=fftshift(F);
+%************
+S2=log(1+abs(Fsh));
+%***********
+F=ifftshift(Fsh);
+f=ifft2(F);
+%*********** Affichage
+figure;
+subplot(2,3,1); imshow(B); title('Image originale');
+subplot(2,3,2); imshow(B); title('Image en niveau de gris');
+subplot(2,3,3); imshow(S,[]); title('Transformée de fourier');
+subplot(2,3,4); imshow(abs(Fsh),[]); title('Transformée centrée');
+subplot(2,3,5); imshow(S2,[]); title('Log transformer image');
+subplot(2,3,6); imshow(f,[]); title('image reconstituée');
